@@ -5,6 +5,7 @@ import Rooms from "./pages/Rooms";
 import SingleRoom from "./pages/SingleRoom";
 import Error from "./pages/Error";
 import Lgin from "./components/Lgin";
+import Book from "./pages/Book";
 
 import Navbar from "./components/Navbar";
 
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/rooms/" component={Rooms} />
         <Route exact path="/rooms/:slug" component={SingleRoom} />
         <Route exact path="/auth" component={Lgin} />
+        <Route exact path="/:slug/book" component={Book} />    
         <Route component={Error} />
       </Switch>
     </>

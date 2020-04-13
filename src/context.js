@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import items from "./data";
 import custom from "./custom";
+var globe;
 
 const RoomContext = React.createContext();
 export default class RoomProvider extends Component {
@@ -11,7 +12,6 @@ export default class RoomProvider extends Component {
     sortedHotels:[],
     featuredRooms: [],
     loading: true,
-    
     location:"all",
     type: "all",
     capacity: 1,
@@ -25,6 +25,7 @@ export default class RoomProvider extends Component {
     pets: false,
   };
 
+  
 
   componentDidMount() {
     // this.getData();
@@ -35,8 +36,6 @@ export default class RoomProvider extends Component {
     //
     let maxPrice = Math.max(...rooms.map(item => item.price));
     let maxSize = Math.max(...rooms.map(item => item.size));
-    let location = Math.max(...rooms.map(item => item.location));
-    let hotelid = Math.max(...rooms.map(item => item.hid));
     
     this.setState({
       rooms,
@@ -45,21 +44,19 @@ export default class RoomProvider extends Component {
       sortedRooms: rooms,
       sortedHotels:hotels,
       loading: false,
-      hotelid1:hotelid,
+      pri:0,
       //
+      bk:"",
       price: maxPrice,
       maxPrice,
       maxSize,
     });
   }
   
-
   formatData(items) {
     let tempItems = items.map(item => {
       let id = item.sys.id;
-    //  console.log(id);
       let images = item.fields.images.map(image => image.fields.file.url);
-
       let room = { ...item.fields, images, id };
       return room;
     });
@@ -68,13 +65,20 @@ export default class RoomProvider extends Component {
   getRoom = slug => {
     let tempRooms = [...this.state.rooms];
     const room = tempRooms.find(room => room.slug === slug);
+    globe=room;
     return room;
   };
-  getHotel = slugh => {
-    let tempHotels = [...this.state.hotels];
-    const cus = tempHotels.find(cus => cus.slugh === slugh);
-    return cus;
+  getID = slug => {
+
+    //alert(room);
+    let tempRooms = [...this.state.rooms];
+
+    const room = tempRooms.find(room => room.slug === slug);
+
+    
+    return globe;
   };
+
   
   handleChange = event => {
     const target = event.target;
@@ -106,7 +110,6 @@ export default class RoomProvider extends Component {
       slug,
       hid
     } = this.state;
-
 
     let tempRooms = [...rooms];
     let tempHotels=[...hotels];
@@ -159,6 +162,7 @@ export default class RoomProvider extends Component {
         value={{
           ...this.state,
           getRoom: this.getRoom ,
+          getID:this.getID,
           handleChange: this.handleChange
         }}
       >

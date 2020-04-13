@@ -8,13 +8,13 @@ import StyledHero from "../components/StyledHero";
 export default class SingleRoom extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
       slug: this.props.match.params.slug,
       defaultBcg: defaultBcg
     };
   }
   static contextType = RoomContext;
+  
 
   // componentDidMount() {
   //   console.log(this.props);
@@ -44,8 +44,9 @@ export default class SingleRoom extends Component {
       pets,
       images
     } = room;
+    
     const [main, ...defaultImages] = images;
-    console.log(defaultImages);
+    
 
     return (
       <>
@@ -77,7 +78,7 @@ export default class SingleRoom extends Component {
               </h6>
               <h6>{pets ? "pets allowed" : "no pets allowed"}</h6>
               <h6>{breakfast && "free breakfast included"}</h6>
-              <Link to={`/book/${name}`} className="btn-primary">
+              <Link to={`/${name}/book`} className="btn-primary">
               BOOK
             </Link>
             </article>
