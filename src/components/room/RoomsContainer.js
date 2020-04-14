@@ -6,6 +6,7 @@ import RoomsList from "./RoomsList";
 
 function RoomContainer({ context }) {
   const { loading, sortedRooms, rooms } = context;
+  console.log(context);
   if (loading) {
     return <Loading />;
   }

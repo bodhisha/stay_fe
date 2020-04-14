@@ -73,7 +73,6 @@ export default [
   {
     sys: {
       id: "2",
-      hotel:"h1"
     },
     fields: {
       name: "single basic",
@@ -81,7 +80,7 @@ export default [
       type: "single",
       price: 150,
       size: 250,
-      hid:"h1" , capacity: 1,
+      hid:"h2" , capacity: 1,
       pets: false,
       location:"kollam",breakfast: false,
       featured: false,
@@ -297,7 +296,7 @@ export default [
       type: "double",
       price: 250,
       size: 350,
-      hid:"h1" , capacity: 2,
+      hid:"h2" , capacity: 2,
       pets: false,
       location:"kollam",breakfast: false,
       featured: false,

@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import defaultImg from "../../images/room-1.jpeg";
 import PropTypes from "prop-types";
 import { memo } from "react";
-const Room = memo(({ room }) => {
-  const { name, slug, images, price } = room;
-  // console.log(name);
+const Room = memo(({ room  }) => {
+  const { name, slug, images, price ,hname  } = room;
+  //const { hn } = hotname;
+   console.log(hname);
   return (
     <article className="room">
       <div className="img-container">
@@ -18,7 +19,7 @@ const Room = memo(({ room }) => {
           features
         </Link>
       </div>
-      <p className="room-info">{name}</p>
+      <p className="room-info">{hname} {name}</p>
     </article>
   );
 });
@@ -28,7 +29,8 @@ Room.propTypes = {
     name: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     images: PropTypes.arrayOf(PropTypes.string).isRequired,
-    price: PropTypes.number.isRequired
+    price: PropTypes.number.isRequired,
+    hname : PropTypes.string.isRequired
   })
 };
 export default Room;

@@ -22,6 +22,7 @@ export default class SingleRoom extends Component {
   render() {
     const { getRoom } = this.context;
     const room = getRoom(this.state.slug);
+    
 
     if (!room) {
       return (
@@ -42,7 +43,8 @@ export default class SingleRoom extends Component {
       extras,
       breakfast,
       pets,
-      images
+      images,
+      hotname
     } = room;
     
     const [main, ...defaultImages] = images;

@@ -19,5 +19,27 @@ export default [
                 }]
         }
 
-    }
+    },
+
+
+
+    {
+      sys:{
+          id:"h2"
+      },
+      fields:{
+          name:"hotel2",
+          location:"kochi",
+          slugh:"fh",
+          images: [
+              {
+                fields: {
+                  file: {
+                    url: img2
+                  }
+                }
+              }]
+      }
+
+  }
 ]

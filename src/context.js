@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import items from "./data";
-import custom from "./custom";
+import items from "./Room_data";
+import Hotel_data from "./Hotel_data";
 var globe;
 
 const RoomContext = React.createContext();
@@ -25,17 +25,20 @@ export default class RoomProvider extends Component {
     pets: false,
   };
 
-  
+
 
   componentDidMount() {
     // this.getData();
+    let hotels = this.formatData(Hotel_data);
+
     let rooms = this.formatData(items);
-    let hotels = this.formatData(custom);
 
     let featuredRooms = rooms.filter(room => room.featured === true);
     //
     let maxPrice = Math.max(...rooms.map(item => item.price));
     let maxSize = Math.max(...rooms.map(item => item.size));
+ 
+
     
     this.setState({
       rooms,
@@ -51,9 +54,20 @@ export default class RoomProvider extends Component {
       maxPrice,
       maxSize,
     });
+    for(var i=0;i<hotels.length;i++){
+      for(var j=0;j<rooms.length;j++){
+        if(hotels[i].id === rooms[j].hid){
+            rooms[j].hname = hotels[i].name;
+        }
+      }
+    }
+   // rooms[0].rooms.hname="sasi";
+    console.log(rooms);
   }
   
   formatData(items) {
+    //let hotels = this.formatData(Hotel_data);
+
     let tempItems = items.map(item => {
       let id = item.sys.id;
       let images = item.fields.images.map(image => image.fields.file.url);
@@ -68,14 +82,7 @@ export default class RoomProvider extends Component {
     globe=room;
     return room;
   };
-  getID = slug => {
-
-    //alert(room);
-    let tempRooms = [...this.state.rooms];
-
-    const room = tempRooms.find(room => room.slug === slug);
-
-    
+  getID = slug => { 
     return globe;
   };
 
@@ -98,7 +105,6 @@ export default class RoomProvider extends Component {
     let {
       rooms,
       hotels,
-      slugh,
       type,
       capacity,
       price,
@@ -107,7 +113,6 @@ export default class RoomProvider extends Component {
       breakfast,
       pets,
       location,
-      slug,
       hid
     } = this.state;
 
@@ -162,7 +167,7 @@ export default class RoomProvider extends Component {
         value={{
           ...this.state,
           getRoom: this.getRoom ,
-          getID:this.getID,
+         // getID:this.getID,
           handleChange: this.handleChange
         }}
       >
@@ -177,6 +182,7 @@ export { RoomProvider, RoomConsumer, RoomContext };
 
 export function withRoomConsumer(Component) {
   return function ConsumerWrapper(props) {
+  
     return (
       <RoomConsumer>
         {value => <Component {...props} context={value} />}
